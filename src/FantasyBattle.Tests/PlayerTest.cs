@@ -25,15 +25,20 @@ namespace FantasyBattle.Tests
     
     public class PlayerTest
     {
-        [Fact(Skip = "Test is not finished yet")]
-        public void DamageCalculations() {
-            Inventory inventory = new Inventory(null);
+        [Fact]
+        public void DamageCalculations() 
+        {
+            // Arrange
+            Equipment equipment = new Equipment(TestData.sword, TestData.excalibur, TestData.helmet, TestData.boots, TestData.breastplate);
+            Inventory inventory = new Inventory(equipment);
             Stats stats = new Stats(1);
             var player = new Player(inventory, stats);
-
-            Damage damage = player.CalculateDamage(null);
             
-            Assert.Equal(9, damage.Amount);
+            // Act
+            Damage damage = player.CalculateDamage(TestData.enemy);
+            
+            // Assert
+            Assert.Equal(149, damage.Amount);
         }
     }
 }
