@@ -27,22 +27,29 @@ namespace FantasyBattle
                    chest.BaseDamage;
         }
 
-        public float CalculateDamageModifier(Stats playerStats)
+        public float GetDamageModifier()
         {
-            var equipment = this.Equipment;
+            var equipment = Equipment;
             var leftHand = equipment.LeftHand;
             var rightHand = equipment.RightHand;
             var head = equipment.Head;
             var feet = equipment.Feet;
             var chest = equipment.Chest;
-            var strengthModifier = playerStats.Strength * 0.1f;
             
-            return strengthModifier +
-                   leftHand.DamageModifier +
-                   rightHand.DamageModifier +
-                   head.DamageModifier +
-                   feet.DamageModifier +
-                   chest.DamageModifier;
+            return leftHand.DamageModifier +
+                rightHand.DamageModifier +
+                head.DamageModifier +
+                feet.DamageModifier +
+                chest.DamageModifier;
+        }
+
+        public float CalculateDamageModifier(Stats playerStats)
+        {
+            var strengthModifier = playerStats.Strength * 0.1f;
+
+            var baseEquipmentDamageModifier = GetDamageModifier();
+            return strengthModifier + baseEquipmentDamageModifier;
+
         }
 
         public int GetTotalRawDamage(Player player)
