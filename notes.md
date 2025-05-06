@@ -119,7 +119,7 @@ public class TestData
 ```
 
 ## Thoughts before starting
-- If the player is equipped with all of starting items in the test data 
+- If the player is equipped with all of starting items, except for the shield, in the test data 
   - Player
     - BaseDamage = 30
     - DamageModifier = 0.1 + 5.2 = 5.3
