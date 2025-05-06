@@ -13,12 +13,13 @@ namespace FantasyBattle
 
         public int CalculateBaseDamage()
         {
-            Equipment equipment = this.Equipment;
-            Item leftHand = equipment.LeftHand;
-            Item rightHand = equipment.RightHand;
-            Item head = equipment.Head;
-            Item feet = equipment.Feet;
-            Item chest = equipment.Chest;
+            var equipment = this.Equipment;
+            var leftHand = equipment.LeftHand;
+            var rightHand = equipment.RightHand;
+            var head = equipment.Head;
+            var feet = equipment.Feet;
+            var chest = equipment.Chest;
+            
             return leftHand.BaseDamage +
                    rightHand.BaseDamage +
                    head.BaseDamage +
@@ -28,13 +29,14 @@ namespace FantasyBattle
 
         public float CalculateDamageModifier(Stats playerStats)
         {
-            Equipment equipment = this.Equipment;
-            Item leftHand = equipment.LeftHand;
-            Item rightHand = equipment.RightHand;
-            Item head = equipment.Head;
-            Item feet = equipment.Feet;
-            Item chest = equipment.Chest;
-            float strengthModifier = playerStats.Strength * 0.1f;
+            var equipment = this.Equipment;
+            var leftHand = equipment.LeftHand;
+            var rightHand = equipment.RightHand;
+            var head = equipment.Head;
+            var feet = equipment.Feet;
+            var chest = equipment.Chest;
+            var strengthModifier = playerStats.Strength * 0.1f;
+            
             return strengthModifier +
                    leftHand.DamageModifier +
                    rightHand.DamageModifier +
