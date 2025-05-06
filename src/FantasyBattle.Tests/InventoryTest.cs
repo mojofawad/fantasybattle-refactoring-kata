@@ -24,10 +24,9 @@ public class InventoryTest
         // Arrange
         var equipment = new Equipment(TestData.sword, TestData.excalibur, TestData.helmet, TestData.boots, TestData.breastplate);
         var inventory = new Inventory(equipment);
-        var player = new Player(new Inventory(equipment), new Stats(1));
         
         // Act
-        var damageModifier = inventory.CalculateDamageModifier(player.Stats);
+        var damageModifier = inventory.CalculateDamageModifier(1);
         
         // Assert 
         Assert.Equal(5.3f, damageModifier, 4); // floating point values need to be rounded
@@ -39,10 +38,9 @@ public class InventoryTest
         // Arrange
         var equipment = new Equipment(TestData.sword, TestData.excalibur, TestData.helmet, TestData.boots, TestData.breastplate);
         var inventory = new Inventory(equipment);
-        var player = new Player(new Inventory(equipment), new Stats(1));
         
         // Act
-        var damage = inventory.GetTotalRawDamage(player);
+        var damage = inventory.GetTotalRawDamage(1);
         
         // Assert
         Assert.Equal(159, damage);
@@ -52,10 +50,8 @@ public class InventoryTest
     public void GetDamageModifier_ReturnsCorrectDamageModifier()
     {
         // Arrange
-        // Arrange
         var equipment = new Equipment(TestData.sword, TestData.excalibur, TestData.helmet, TestData.boots, TestData.breastplate);
         var inventory = new Inventory(equipment);
-        var player = new Player(new Inventory(equipment), new Stats(1));
         
         // Act
         var damageModifier = inventory.GetDamageModifier();

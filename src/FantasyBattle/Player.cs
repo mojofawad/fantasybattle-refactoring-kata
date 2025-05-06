@@ -5,32 +5,33 @@ namespace FantasyBattle
 {
     public class Player : Target
     {
-        private Inventory Inventory { get; }
-        public Stats Stats { get; }
+        private readonly Inventory _inventory;
+        private readonly Stats _stats;
 
         public Player(Inventory inventory, Stats stats)
         {
-            Inventory = inventory;
-            Stats = stats;
+            _inventory = inventory;
+            _stats = stats;
         }
 
-        public Damage CalculateDamage(Target other)
+        public Damage CalculateDamage(Target target)
         {
-            var totalDamage = Inventory.GetTotalRawDamage(this);
-            int soak = GetSoak(other, totalDamage);
-            return new Damage(Math.Max(0, totalDamage - soak));
+            var rawDamage = _inventory.GetTotalRawDamage(_stats.Strength);
+            var soak = GetSoak(target, rawDamage);
+            
+            return new Damage(Math.Max(0, rawDamage - soak));
         }
 
-        private int GetSoak(Target other, int totalDamage)
+        private int GetSoak(Target target, int rawDamage)
         {
             int soak = 0;
-            if (other is Player)
+            if (target is Player)
             {
                 // TODO: Not implemented yet
                 //  Add friendly fire
-                soak = totalDamage;
+                soak = rawDamage;
             }
-            else if (other is SimpleEnemy simpleEnemy)
+            else if (target is SimpleEnemy simpleEnemy)
             {
                 soak = (int)Math.Round(
                     simpleEnemy.Armor.DamageSoak *

@@ -43,19 +43,19 @@ namespace FantasyBattle
                 chest.DamageModifier;
         }
 
-        public float CalculateDamageModifier(Stats playerStats)
+        public float CalculateDamageModifier(float strength)
         {
-            var strengthModifier = playerStats.Strength * 0.1f;
+            var strengthModifier = strength * 0.1f;
 
             var baseEquipmentDamageModifier = GetDamageModifier();
             return strengthModifier + baseEquipmentDamageModifier;
 
         }
 
-        public int GetTotalRawDamage(Player player)
+        public int GetTotalRawDamage(float strength)
         {
-            var baseDamage = this.CalculateBaseDamage();
-            var damageModifier = this.CalculateDamageModifier(player.Stats);
+            var baseDamage = CalculateBaseDamage();
+            var damageModifier = CalculateDamageModifier(strength);
             
             return (int)Math.Round(baseDamage * damageModifier, 0);
         }
