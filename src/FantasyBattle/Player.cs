@@ -5,7 +5,7 @@ namespace FantasyBattle
 {
     public class Player : Target
     {
-        public Inventory Inventory { get; }
+        private Inventory Inventory { get; }
         public Stats Stats { get; }
 
         public Player(Inventory inventory, Stats stats)
@@ -16,28 +16,9 @@ namespace FantasyBattle
 
         public Damage CalculateDamage(Target other)
         {
-            int baseDamage = Inventory.CalculateBaseDamage();
-            float damageModifier = CalculateDamageModifier();
-            int totalDamage = (int)Math.Round(baseDamage * damageModifier, 0);
+            var totalDamage = Inventory.GetTotalRawDamage(this);
             int soak = GetSoak(other, totalDamage);
             return new Damage(Math.Max(0, totalDamage - soak));
-        }
-
-        private float CalculateDamageModifier()
-        {
-            Equipment equipment = Inventory.Equipment;
-            Item leftHand = equipment.LeftHand;
-            Item rightHand = equipment.RightHand;
-            Item head = equipment.Head;
-            Item feet = equipment.Feet;
-            Item chest = equipment.Chest;
-            float strengthModifier = Stats.Strength * 0.1f;
-            return strengthModifier +
-                   leftHand.DamageModifier +
-                   rightHand.DamageModifier +
-                   head.DamageModifier +
-                   feet.DamageModifier +
-                   chest.DamageModifier;
         }
 
         private int GetSoak(Target other, int totalDamage)
